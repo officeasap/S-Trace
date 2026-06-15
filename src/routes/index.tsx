@@ -45,7 +45,7 @@ function SecureTracePage() {
     setError("");
     setIsValid(false);
     try {
-      const { data, error: dbError } = await supabase
+      const { data, error: dbError } = await (supabase as any)
         .from("tracking_cards")
         .select("*")
         .eq("tracking_code", code)
