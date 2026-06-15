@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { ShieldCheck, AlertTriangle, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
+import { ShieldCheck, AlertTriangle, ChevronLeft, ChevronRight, Loader2, MapPin, Home, Mail, Send } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/")({
