@@ -93,10 +93,13 @@
     inset -9px -9px 18px rgba(255,255,255,0.05);
 }
 
-/* LEVEL 2 — Info Cards */
+/* LEVEL 2 — Info Cards (deep inset) */
 .depth-track {
   background: var(--element);
-  box-shadow: 4px 6px 10px rgba(0,0,0,0.5);
+  box-shadow:
+    inset 8px 8px 16px rgba(0,0,0,0.9),
+    inset -6px -6px 12px rgba(255,255,255,0.04),
+    6px 8px 16px rgba(0,0,0,0.5);
 }
 
 /* Status color variants on buttons */
