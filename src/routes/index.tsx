@@ -166,18 +166,14 @@ function SecureTracePage() {
                 <button
                   type="button"
                   onClick={() => setSide("front")}
-                  className={`depth-button flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-xs font-semibold uppercase tracking-[0.18em] ${
-                    side === "front" ? "text-text-primary" : "text-text-secondary"
-                  }`}
+                  className="depth-button depth-button-primary flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-xs font-semibold uppercase tracking-[0.18em]"
                 >
                   <ChevronLeft className="h-4 w-4" /> Front
                 </button>
                 <button
                   type="button"
                   onClick={() => setSide("back")}
-                  className={`depth-button flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-xs font-semibold uppercase tracking-[0.18em] ${
-                    side === "back" ? "text-text-primary" : "text-text-secondary"
-                  }`}
+                  className="depth-button depth-button-primary flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-xs font-semibold uppercase tracking-[0.18em]"
                 >
                   Back <ChevronRight className="h-4 w-4" />
                 </button>
@@ -185,21 +181,27 @@ function SecureTracePage() {
             </section>
 
             <section className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-              <div className="depth-track rounded-2xl p-5">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-text-secondary">
-                  Departure
-                </p>
-                <p className="mt-2 text-base font-semibold text-text-primary">
-                  {departureLocation}
-                </p>
+              <div className="depth-track flex items-center justify-between rounded-2xl p-5">
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-text-secondary">
+                    Departure
+                  </p>
+                  <p className="mt-2 text-base font-semibold text-text-primary">
+                    {departureLocation}
+                  </p>
+                </div>
+                <MapPin className="h-5 w-5 text-[color:var(--status-blue)]" strokeWidth={1.75} />
               </div>
-              <div className="depth-track rounded-2xl p-5">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-text-secondary">
-                  Sorting
-                </p>
-                <p className="mt-2 text-base font-semibold text-text-primary">
-                  {sortingLocation}
-                </p>
+              <div className="depth-track flex items-center justify-between rounded-2xl p-5">
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-text-secondary">
+                    Sorting
+                  </p>
+                  <p className="mt-2 text-base font-semibold text-text-primary">
+                    {sortingLocation}
+                  </p>
+                </div>
+                <Home className="h-5 w-5 text-[color:var(--status-blue)]" strokeWidth={1.75} />
               </div>
             </section>
 
@@ -214,6 +216,57 @@ function SecureTracePage() {
                 />
                 {status}
               </span>
+            </section>
+
+            <section className="mt-6 depth-card rounded-3xl p-6 md:p-8">
+              <label
+                htmlFor="email-updates"
+                className="mb-3 block text-xs font-medium uppercase tracking-[0.18em] text-text-secondary"
+              >
+                Email for Delivery Updates
+              </label>
+              <div className="flex flex-col gap-4 md:flex-row">
+                <div className="depth-input relative flex flex-1 items-center rounded-xl px-5">
+                  <Mail className="h-4 w-4 text-text-secondary" />
+                  <input
+                    id="email-updates"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email address"
+                    className="w-full bg-transparent py-4 pl-3 text-sm text-text-primary outline-none placeholder:text-text-secondary"
+                    autoComplete="email"
+                  />
+                </div>
+                <button
+                  type="button"
+                  onClick={handleSendEmail}
+                  disabled={isEmailSending}
+                  className="depth-button depth-button-primary flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-sm font-semibold uppercase tracking-[0.18em] disabled:opacity-70"
+                >
+                  {isEmailSending ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Send className="h-4 w-4" strokeWidth={2} />
+                  )}
+                  {isEmailSending ? "Sending" : "Send Email"}
+                </button>
+              </div>
+              <p className="mt-4 text-[11px] leading-relaxed text-text-secondary">
+                🔒 We respect your privacy. Your email will only be used to send delivery status
+                updates for this tracking code. You may unsubscribe at any time. No spam, ever.
+              </p>
+              {emailStatus && (
+                <p
+                  className={`mt-3 text-xs ${
+                    emailStatus.startsWith("✓")
+                      ? "text-[color:var(--status-green)]"
+                      : "text-[color:var(--status-orange)]"
+                  }`}
+                >
+                  {emailStatus}
+                </p>
+              )}
             </section>
           </>
         )}
