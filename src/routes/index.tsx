@@ -33,6 +33,22 @@ function SecureTracePage() {
   const [status, setStatus] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [emailStatus, setEmailStatus] = useState("");
+  const [isEmailSending, setIsEmailSending] = useState(false);
+
+  const handleSendEmail = () => {
+    setEmailStatus("");
+    if (!email || !email.includes("@")) {
+      setEmailStatus("Please enter a valid email address");
+      return;
+    }
+    setIsEmailSending(true);
+    setTimeout(() => {
+      setEmailStatus(`✓ Update requests will be sent to ${email}`);
+      setIsEmailSending(false);
+    }, 900);
+  };
 
   const verifyTrackingCode = async () => {
     const code = trackingCode.trim().toUpperCase();
