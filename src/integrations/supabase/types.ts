@@ -14,7 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      tracking_cards: {
+        Row: {
+          back_image_url: string
+          departure_location: string | null
+          front_image_url: string
+          id: string
+          sorting_location: string | null
+          status: string | null
+          tracking_code: string
+          updated_at: string | null
+        }
+        Insert: {
+          back_image_url: string
+          departure_location?: string | null
+          front_image_url: string
+          id?: string
+          sorting_location?: string | null
+          status?: string | null
+          tracking_code: string
+          updated_at?: string | null
+        }
+        Update: {
+          back_image_url?: string
+          departure_location?: string | null
+          front_image_url?: string
+          id?: string
+          sorting_location?: string | null
+          status?: string | null
+          tracking_code?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
