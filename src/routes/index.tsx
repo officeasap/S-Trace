@@ -37,18 +37,38 @@ function SecureTracePage() {
   const [emailStatus, setEmailStatus] = useState("");
   const [isEmailSending, setIsEmailSending] = useState(false);
 
-  const handleSendEmail = () => {
+  const handleSendEmail = async () => {
     setEmailStatus("");
-    if (!email || !email.includes("@")) {
+    const trimmed = email.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
       setEmailStatus("Please enter a valid email address");
       return;
     }
     setIsEmailSending(true);
-    setTimeout(() => {
-      setEmailStatus(`✓ Update requests will be sent to ${email}`);
+    try {
+      const { error: subError } = await (supabase as any)
+        .from("email_subscriptions")
+        .insert({ tracking_code: trackingCode.trim().toUpperCase(), email: trimmed });
+      if (subError && !/duplicate key/i.test(subError.message ?? "")) {
+        setEmailStatus("Could not save subscription. Please try again.");
+      } else {
+        setEmailStatus(`✓ Delivery updates will be sent to ${trimmed}`);
+        setEmail("");
+      }
+    } catch {
+      setEmailStatus("Could not save subscription. Please try again.");
+    } finally {
       setIsEmailSending(false);
-    }, 900);
+    }
   };
+
+  const statusColor = (() => {
+    const s = status.toLowerCase();
+    if (s.includes("deliver")) return "var(--status-green)";
+    if (s.includes("transit") || s.includes("depart")) return "var(--status-blue)";
+    if (s.includes("fail") || s.includes("hold") || s.includes("return")) return "var(--status-red)";
+    return "var(--status-orange)";
+  })();
 
   const verifyTrackingCode = async () => {
     const code = trackingCode.trim().toUpperCase();
