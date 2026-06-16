@@ -232,7 +232,7 @@ function SecureTracePage() {
               <span className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-text-primary">
                 <span
                   className="inline-block h-2 w-2 rounded-full"
-                  style={{ background: "var(--status-orange)" }}
+                  style={{ background: statusColor, boxShadow: `0 0 12px ${statusColor}` }}
                 />
                 {status}
               </span>
