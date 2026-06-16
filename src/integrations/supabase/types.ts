@@ -14,6 +14,27 @@ export type Database = {
   }
   public: {
     Tables: {
+      email_subscriptions: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          tracking_code: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          tracking_code: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          tracking_code?: string
+        }
+        Relationships: []
+      }
       tracking_cards: {
         Row: {
           back_image_url: string
