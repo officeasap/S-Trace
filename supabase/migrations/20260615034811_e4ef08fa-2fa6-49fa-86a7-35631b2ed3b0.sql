@@ -24,8 +24,8 @@ INSERT INTO public.tracking_cards (
   sorting_location, departure_location, status
 ) VALUES (
   'AU-Y0312J9',
-  '/image1.svg',
-  '/image2.svg',
+  '/image1.png',
+  '/image2.png',
   'Addis Ababa Sorting Center',
   'Bole | Addis Ababa',
   'Sorting'

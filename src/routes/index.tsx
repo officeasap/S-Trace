@@ -109,14 +109,23 @@ function SecureTracePage() {
   return (
     <main className="min-h-screen bg-background px-4 py-10 md:py-16">
       <div className="mx-auto max-w-3xl">
-        {/* Header */}
+        {/* Header with Logo */}
         <header className="mb-10 flex items-center gap-4">
-          <div className="depth-button flex h-12 w-12 items-center justify-center rounded-xl">
-            <ShieldCheck className="h-6 w-6 text-text-primary" strokeWidth={1.75} />
-          </div>
+          <img 
+            src="/logo-secure-trace.png" 
+            alt="SecureTrace Logo" 
+            className="h-12 w-auto rounded-xl depth-button"
+            onError={(e) => {
+              e.currentTarget.style.display = "none";
+              const fallback = document.createElement("div");
+              fallback.className = "depth-button flex h-12 w-12 items-center justify-center rounded-xl";
+              fallback.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check text-text-primary"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>`;
+              e.currentTarget.parentNode?.appendChild(fallback);
+            }}
+          />
           <div>
             <h1 className="text-2xl font-semibold tracking-tight text-text-primary md:text-3xl">
-              SecureTrace
+              {/* "SecureTrace" removed as requested */}
             </h1>
             <p className="text-xs uppercase tracking-[0.2em] text-text-secondary">
               Corporate Verification Portal
@@ -141,7 +150,7 @@ function SecureTracePage() {
               onKeyDown={(e) => {
                 if (e.key === "Enter") verifyTrackingCode();
               }}
-              placeholder="e.g. AU-Y0312J9"
+              placeholder="e.g. ABC-123Y"
               className="depth-input flex-1 rounded-xl px-5 py-4 font-mono text-base tracking-wider"
               autoComplete="off"
               spellCheck={false}
@@ -173,7 +182,7 @@ function SecureTracePage() {
         {isValid && (
           <>
             <section className="mt-8 depth-card rounded-3xl p-6 md:p-8">
-              <div className="overflow-hidden rounded-2xl bg-black/30">
+              <div className="mx-auto max-w-xs overflow-hidden rounded-2xl bg-black/30">
                 <img
                   src={side === "front" ? frontImage : backImage}
                   alt={side === "front" ? "Identification card front" : "Identification card back"}
