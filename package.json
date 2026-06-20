@@ -8,6 +8,8 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
+    "preview:cloudflare": "npm run build && npx wrangler pages dev dist/client",
+    "deploy:cloudflare": "npm run build && npx wrangler pages deploy dist/client",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
